@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Url To Qr</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  </head>
+  <body>
+    <div class="contain">
+        <div class="input-group">
+            <h1>QR Code Generator</h1>
+            <input
+            type="text"
+            id="urlInput"
+            placeholder="Enter URL"
+          />
+          <button onclick="generateSingleQR()">Generate QR Code</button>
+          <div id="qrcode"></div>
+        </div>
+    </div>
+    <script>
+        function generateSingleQR() {
+            const url = document.getElementById('urlInput').value;
+            if (url) {
+                generateQR('qrcode', url);
+            } else {
+                alert('Please enter a URL');
+            }
+        }
+        function generateQR(elementId, text) {
+            // Clear previous QR code
+            document.getElementById(elementId).innerHTML = '';
+            
+            // Generate new QR code
+            new QRCode(document.getElementById(elementId), {
+                text: text,
+                width: 128,
+                height: 128,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            document.getElementById("urlInput").value = "";
+
+        }
+    </script>
+  </body>
+</html>
